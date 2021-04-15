@@ -29,7 +29,7 @@ text-transform: uppercase;
 </style>
 <div class="row">
     <div class="col-12 text-center">
-        <center><h3><strong>Politeknik Negeri MALANG</strong></h3><br /><h3><strong>KARTU HASIL STUDI (KHS)</strong></h3></center>
+        <center><h3><strong>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</strong></h3><br /><h3><strong>KARTU HASIL STUDI (KHS)</strong></h3></center>
     </div>
     <div class="col-12 my-4">
         <p class="m-0"><strong>Nama:</strong> {{ $Mahasiswa->nama }}</p>
