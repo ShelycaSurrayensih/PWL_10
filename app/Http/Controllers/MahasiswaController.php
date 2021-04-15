@@ -161,4 +161,10 @@ class MahasiswaController extends Controller
         $Mahasiswa = Mahasiswa::with('kelas', 'matakuliah')->find($nim);
         return view('mahasiswa.nilai', compact('Mahasiswa'));
     }
+    public function cari(Request $request)
+	{
+		$Mahasiswa=Mahasiswa::where('nama',$request->nama)->first();
+        return view('mahasiswa.cari',compact('Mahasiswa'));
+
+	}
 }
