@@ -20,9 +20,10 @@
                 </ul>
             </div>
             @endif
-            <form method="post" action="{{ route('mahasiswa.update', $Mahasiswa->nim) }}" id="myForm">
-            @csrf
-            @method('PUT')
+            <form action="/mahasiswa/{{$Mahasiswa->nim}}" method="post"
+                enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
             <div class="form-group">
                 <label for="nim">Nim</label>
                 <input type="text" name="nim" class="form-control" id="nim" value="{{ $Mahasiswa->nim }}" aria-describedby="nim" >
@@ -31,6 +32,17 @@
                 <label for="nama">Nama</label>
                 <input type="text" name="nama" class="form-control" id="nama" value="{{ $Mahasiswa->nama }}" aria-describedby="nama" >
             </div>
+            @php
+            $pathImage = '';
+            $Mahasiswa->foto ? ($pathImage = 'storage/' . $Mahasiswa->foto) : ($pathImage = 'img/empty.jpg');
+            @endphp
+            <div class="d-flex align-items-start mb-3">
+            <img src="{{ asset('' . $pathImage . '') }}" alt="" width="100" class="img-responsive">
+            <div class="form-group ml-3 ">
+                <label for="foto">Foto</label>
+                <input type="file" class="form-control-file" id="foto" name="foto">
+            </div>
+        </div>
             <div class="form-group">
                 <label for="tanggal_lahir">Tanggal Lahir</label>
                 <input type="date" name="tanggal_lahir" class="form-control" id="tanggal_lahir" value="{{ $Mahasiswa->tanggal_lahir }}" aria-describedby="tanggal_lahir" >

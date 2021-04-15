@@ -45,7 +45,7 @@
             <td>
                 @php
                 $pathImage = '';
-                $mahasiswa->foto ? ($pathImage = 'storage/' . $mahasiswa->foto) : ($pathImage = 'img/empty.jpg');
+                $Mahasiswa->foto ? ($pathImage = 'storage/' . $Mahasiswa->foto) : ($pathImage = 'img/empty.jpg');
             @endphp
             <img src="{{ asset('' . $pathImage . '') }}" width="100" alt="">
             </td>

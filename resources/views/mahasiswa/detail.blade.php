@@ -11,6 +11,14 @@
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item"><b>Nim </b>{{$Mahasiswa->nim}}</li>
                 <li class="list-group-item"><b>Nama </b>{{$Mahasiswa->nama}}</li>
+                <li class="list-group-item">
+                    <b>Foto:</b>
+                        @php
+                        $pathImage = '';
+                        $Mahasiswa->foto ? ($pathImage = 'storage/' . $Mahasiswa->foto) : ($pathImage = 'img/empty.jpg');
+                    @endphp
+                    <img src="{{ asset('' . $pathImage . '') }}" width="100" alt="">
+                </li>
                 <li class="list-group-item"><b>Tanggal Lahir </b>{{$Mahasiswa->tanggal_lahir}}</li>
                 <li class="list-group-item"><b>Kelas </b>{{$Mahasiswa->kelas->nama_kelas}}</li>
                 <li class="list-group-item"><b>Jurusan </b>{{$Mahasiswa->jurusan}}</li>

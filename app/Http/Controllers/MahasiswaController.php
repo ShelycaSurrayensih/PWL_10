@@ -7,6 +7,8 @@ use App\Models\Kelas;
 use App\Models\MataKuliah;
 use App\Models\Mahasiswa_MataKuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use PDF;
 
 class MahasiswaController extends Controller
 {
@@ -56,12 +58,16 @@ class MahasiswaController extends Controller
             'no_handphone' => 'required',
             'email' => 'required',
             ]);
+            if($request->file('foto')) {
+                $photo_name = $request->file('foto')->store('images', 'public');
+            }
 
             $kelas = Kelas::find($request->get('kelas'));
 
             $Mahasiswa = new Mahasiswa;
             $Mahasiswa->Nim = $request->get('nim');
             $Mahasiswa->Nama = $request->get('nama');
+            $Mahasiswa->foto = $photo_name;
             $Mahasiswa->Tanggal_Lahir = $request->get('tanggal_lahir');
             $Mahasiswa->Jurusan = $request->get('jurusan');
             $Mahasiswa->No_Handphone = $request->get('no_handphone');
@@ -137,6 +143,11 @@ class MahasiswaController extends Controller
         //fungsi eloquent untuk mengupdate data dengan relasi belongsTo
         $Mahasiswa->kelas()->associate($kelas);
         $Mahasiswa->save();
+        if($Mahasiswa->foto && file_exists( storage_path('app/public/' . $Mahasiswa->foto))){
+            Storage::delete('public/' . $Mahasiswa->foto);
+        }
+        $photo_name = $request->file('foto')->store('images','public');
+        $Mahasiswa->foto = $photo_name;
 
         //jika data berhasil diupdate, akan kembali ke halaman utama
             return redirect()->route('mahasiswa.index')
